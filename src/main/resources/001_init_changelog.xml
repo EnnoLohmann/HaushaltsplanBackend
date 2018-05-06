@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd">
+    <changeSet author="ennol (generated)" id="1525528462922-1">
+        <createTable tableName="housekeeping_task">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="housekeeping_task_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="type" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ennol (generated)" id="1525528462922-2">
+        <createTable tableName="running_task">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="running_task_pkey"/>
+            </column>
+            <column name="started_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="task_id" type="BIGINT"/>
+            <column name="finished" type="BOOL"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ennol (generated)" id="1525528462922-3">
+        <createTable tableName="zone">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="active" type="BOOL"/>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ennol (generated)" id="1525528462922-4">
+        <createTable tableName="zone_tasks">
+            <column name="zone_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tasks_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="ennol (generated)" id="1525528462922-5">
+        <addPrimaryKey columnNames="id" constraintName="zone_pkey" tableName="zone"/>
+    </changeSet>
+    <changeSet author="ennol (generated)" id="1525528462922-6">
+        <addUniqueConstraint columnNames="tasks_id" constraintName="uk_h6mlrfqc5oygmvkbghch3v3yg" deferrable="false"
+                             disabled="false" initiallyDeferred="false" tableName="zone_tasks"/>
+    </changeSet>
+    <changeSet author="ennol (generated)" id="1525528462922-7">
+        <addForeignKeyConstraint baseColumnNames="task_id" baseTableName="running_task"
+                                 constraintName="fk6f2v2j5wj2kfhbr0do6bwgtwn" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="housekeeping_task"/>
+    </changeSet>
+    <changeSet author="ennol (generated)" id="1525528462922-8">
+        <addForeignKeyConstraint baseColumnNames="zone_id" baseTableName="zone_tasks"
+                                 constraintName="fk79b6sswoylnrvjvam2ct2n8jb" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="zone"/>
+    </changeSet>
+    <changeSet author="ennol (generated)" id="1525528462922-9">
+        <addForeignKeyConstraint baseColumnNames="tasks_id" baseTableName="zone_tasks"
+                                 constraintName="fkdtgli380p8mo4j8nvrdpc5i9e" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="housekeeping_task"/>
+    </changeSet>
+    <changeSet author="ennol (generated)" id="1525528462922-10">
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="1"/>
+            <column name="name" type="varchar(255)" value="Küche: Aufräumen"/>
+            <column name="type" type="varchar(255)" value="DAILY"/>
+        </insert>
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="2"/>
+            <column name="name" type="varchar(255)" value="Küche: Flächen abwischen"/>
+            <column name="type" type="varchar(255)" value="DAILY"/>
+        </insert>
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="3"/>
+            <column name="name" type="varchar(255)" value="Küche: ggf. Müll rausbringen"/>
+            <column name="type" type="varchar(255)" value="DAILY"/>
+        </insert>
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="4"/>
+            <column name="name" type="varchar(255)" value="Küche: ggf. Spülmaschine"/>
+            <column name="type" type="varchar(255)" value="DAILY"/>
+        </insert>
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="5"/>
+            <column name="name" type="varchar(255)" value="Wohnzimmer: Esstisch abräumen"/>
+            <column name="type" type="varchar(255)" value="DAILY"/>
+        </insert>
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="6"/>
+            <column name="name" type="varchar(255)" value="Schlafzimmer: Wäsche aufsammeln"/>
+            <column name="type" type="varchar(255)" value="DAILY"/>
+        </insert>
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="7"/>
+            <column name="name" type="varchar(255)" value="Schlafzimmer: Wäsche waschen"/>
+            <column name="type" type="varchar(255)" value="DAILY"/>
+        </insert>
+    </changeSet>
+    <changeSet author="ennol (generated)" id="1525528462922-11">
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="8"/>
+            <column name="name" type="varchar(255)" value="Staubsaugen"/>
+            <column name="type" type="varchar(255)" value="WEEKLY"/>
+        </insert>
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="9"/>
+            <column name="name" type="varchar(255)" value="Blumen Gießen"/>
+            <column name="type" type="varchar(255)" value="WEEKLY"/>
+        </insert>
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="10"/>
+            <column name="name" type="varchar(255)" value="Arbeitszimmer: Schreibtische aufräumen"/>
+            <column name="type" type="varchar(255)" value="WEEKLY"/>
+        </insert>
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="11"/>
+            <column name="name" type="varchar(255)" value="Wäsche zusammenlegen"/>
+            <column name="type" type="varchar(255)" value="WEEKLY"/>
+        </insert>
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="12"/>
+            <column name="name" type="varchar(255)" value="Küche: Kühlschrank aussortieren"/>
+            <column name="type" type="varchar(255)" value="WEEKLY"/>
+        </insert>
+    </changeSet>
+    <changeSet author="ennol (generated)" id="1525528462922-12">
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="13"/>
+            <column name="name" type="varchar(255)" value="Schlafzimmer: Bett neu beziehen"/>
+            <column name="type" type="varchar(255)" value="TWOWEEKLY"/>
+        </insert>
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="14"/>
+            <column name="name" type="varchar(255)" value="Bad: Badewanne Innen"/>
+            <column name="type" type="varchar(255)" value="TWOWEEKLY"/>
+        </insert>
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="15"/>
+            <column name="name" type="varchar(255)" value="Bad: Badewanne außen"/>
+            <column name="type" type="varchar(255)" value="TWOWEEKLY"/>
+        </insert>
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="16"/>
+            <column name="name" type="varchar(255)" value="Bad: Waschbecken innen"/>
+            <column name="type" type="varchar(255)" value="TWOWEEKLY"/>
+        </insert>
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="17"/>
+            <column name="name" type="varchar(255)" value="Bad: Waschbecken außen"/>
+            <column name="type" type="varchar(255)" value="TWOWEEKLY"/>
+        </insert>
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="18"/>
+            <column name="name" type="varchar(255)" value="Bad: Toilette innen"/>
+            <column name="type" type="varchar(255)" value="TWOWEEKLY"/>
+        </insert>
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="19"/>
+            <column name="name" type="varchar(255)" value="Bad: Toilette außen"/>
+            <column name="type" type="varchar(255)" value="TWOWEEKLY"/>
+        </insert>
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="20"/>
+            <column name="name" type="varchar(255)" value="Bad: Heizung abstauben"/>
+            <column name="type" type="varchar(255)" value="TWOWEEKLY"/>
+        </insert>
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="21"/>
+            <column name="name" type="varchar(255)" value="Bad: Regal entstauben und Ordnen"/>
+            <column name="type" type="varchar(255)" value="TWOWEEKLY"/>
+        </insert>
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="22"/>
+            <column name="name" type="varchar(255)" value="Bad: Unterschrank aufräumen"/>
+            <column name="type" type="varchar(255)" value="TWOWEEKLY"/>
+        </insert>
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="23"/>
+            <column name="name" type="varchar(255)" value="Bad: wischen"/>
+            <column name="type" type="varchar(255)" value="TWOWEEKLY"/>
+        </insert>
+    </changeSet>
+    <changeSet author="ennol (generated)" id="1525528462922-13">
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="24"/>
+            <column name="name" type="varchar(255)" value="Fenster Putzen"/>
+            <column name="type" type="varchar(255)" value="ZONE"/>
+        </insert>
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="25"/>
+            <column name="name" type="varchar(255)" value="Türen abwischen"/>
+            <column name="type" type="varchar(255)" value="ZONE"/>
+        </insert>
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="26"/>
+            <column name="name" type="varchar(255)" value="Lichtschalter abwischen"/>
+            <column name="type" type="varchar(255)" value="ZONE"/>
+        </insert>
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="27"/>
+            <column name="name" type="varchar(255)" value="Heizung und Regler"/>
+            <column name="type" type="varchar(255)" value="ZONE"/>
+        </insert>
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="28"/>
+            <column name="name" type="varchar(255)" value="Arbeitszimmer: Schreibtische Putzen"/>
+            <column name="type" type="varchar(255)" value="ZONE"/>
+        </insert>
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="29"/>
+            <column name="name" type="varchar(255)" value="Arbeitszimmer: Garderobe aufräumen"/>
+            <column name="type" type="varchar(255)" value="ZONE"/>
+        </insert>
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="30"/>
+            <column name="name" type="varchar(255)" value="Arbeitszimmer: Spiegel reinigen"/>
+            <column name="type" type="varchar(255)" value="ZONE"/>
+        </insert>
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="31"/>
+            <column name="name" type="varchar(255)" value="Arbeitszimmer: Couchritzen saugen"/>
+            <column name="type" type="varchar(255)" value="ZONE"/>
+        </insert>
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="32"/>
+            <column name="name" type="varchar(255)" value="Schlafzimmer: Schränke ausmisten"/>
+            <column name="type" type="varchar(255)" value="ZONE"/>
+        </insert>
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="33"/>
+            <column name="name" type="varchar(255)" value="Schlafzimmer: Nachttische aufräumen + reinigen"/>
+            <column name="type" type="varchar(255)" value="ZONE"/>
+        </insert>
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="34"/>
+            <column name="name" type="varchar(255)" value="Schlafzimmer: Fernbedienungen säubern"/>
+            <column name="type" type="varchar(255)" value="ZONE"/>
+        </insert>
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="35"/>
+            <column name="name" type="varchar(255)" value="Küche + Teeküche: Tee- und Backschubladen ausmisten"/>
+            <column name="type" type="varchar(255)" value="ZONE"/>
+        </insert>
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="36"/>
+            <column name="name" type="varchar(255)" value="Küche + Teeküche: Schränke abwischen"/>
+            <column name="type" type="varchar(255)" value="ZONE"/>
+        </insert>
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="37"/>
+            <column name="name" type="varchar(255)" value="Küche + Teeküche: Innenreinigung der Schränke und Schubladen"/>
+            <column name="type" type="varchar(255)" value="ZONE"/>
+        </insert>
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="38"/>
+            <column name="name" type="varchar(255)" value="Küche + Teeküche: Innenreinigung des Kühlschrankes "/>
+            <column name="type" type="varchar(255)" value="ZONE"/>
+        </insert>
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="39"/>
+            <column name="name" type="varchar(255)" value="Wohnzimmer + Diele: Staub wischen"/>
+            <column name="type" type="varchar(255)" value="ZONE"/>
+        </insert>
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="40"/>
+            <column name="name" type="varchar(255)" value="Wohnzimmer + Diele: Coucharmlehnen entstauben"/>
+            <column name="type" type="varchar(255)" value="ZONE"/>
+        </insert>
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="41"/>
+            <column name="name" type="varchar(255)" value="Wohnzimmer + Diele: Couchritzen saugen"/>
+            <column name="type" type="varchar(255)" value="ZONE"/>
+        </insert>
+        <insert tableName="housekeeping_task">
+            <column name="id" type="varchar(255)" value="42"/>
+            <column name="name" type="varchar(255)" value="Wohnzimmer + Diele: Fernbedienungen säubern"/>
+            <column name="type" type="varchar(255)" value="ZONE"/>
+        </insert>
+    </changeSet>
+    <changeSet author="ennol (generated)" id="1525528462922-14">
+        <insert tableName="zone">
+            <column name="id" type="varchar(255)" value="1"/>
+            <column name="active" type="varchar(255)" value="true"/>
+            <column name="name" type="varchar(255)" value="Allgemein"/>
+        </insert>
+        <insert tableName="zone">
+            <column name="id" type="varchar(255)" value="2"/>
+            <column name="active" type="varchar(255)" value="false"/>
+            <column name="name" type="varchar(255)" value="Arbeitszimmer"/>
+        </insert>
+        <insert tableName="zone">
+            <column name="id" type="varchar(255)" value="3"/>
+            <column name="active" type="varchar(255)" value="false"/>
+            <column name="name" type="varchar(255)" value="Schlafzimmer"/>
+        </insert>
+        <insert tableName="zone">
+            <column name="id" type="varchar(255)" value="4"/>
+            <column name="active" type="varchar(255)" value="false"/>
+            <column name="name" type="varchar(255)" value="Küche + Teeküche"/>
+        </insert>
+        <insert tableName="zone">
+            <column name="id" type="varchar(255)" value="5"/>
+            <column name="active" type="varchar(255)" value="false"/>
+            <column name="name" type="varchar(255)" value="Wohnzimmer + Diele"/>
+        </insert>
+    </changeSet>
+    <changeSet author="ennol (generated)" id="1525528462922-15">
+        <insert tableName="zone_tasks">
+            <column name="zone_id" type="BIGINT" value="1"/>
+            <column name="tasks_id" type="BIGINT" value="24"/>
+        </insert>
+        <insert tableName="zone_tasks">
+            <column name="zone_id" type="BIGINT" value="1"/>
+            <column name="tasks_id" type="BIGINT" value="25"/>
+        </insert>
+        <insert tableName="zone_tasks">
+            <column name="zone_id" type="BIGINT" value="1"/>
+            <column name="tasks_id" type="BIGINT" value="26"/>
+        </insert>
+        <insert tableName="zone_tasks">
+            <column name="zone_id" type="BIGINT" value="1"/>
+            <column name="tasks_id" type="BIGINT" value="27"/>
+        </insert>
+        <insert tableName="zone_tasks">
+            <column name="zone_id" type="BIGINT" value="2"/>
+            <column name="tasks_id" type="BIGINT" value="28"/>
+        </insert>
+        <insert tableName="zone_tasks">
+            <column name="zone_id" type="BIGINT" value="2"/>
+            <column name="tasks_id" type="BIGINT" value="29"/>
+        </insert>
+        <insert tableName="zone_tasks">
+            <column name="zone_id" type="BIGINT" value="2"/>
+            <column name="tasks_id" type="BIGINT" value="30"/>
+        </insert>
+        <insert tableName="zone_tasks">
+            <column name="zone_id" type="BIGINT" value="2"/>
+            <column name="tasks_id" type="BIGINT" value="31"/>
+        </insert>
+        <insert tableName="zone_tasks">
+            <column name="zone_id" type="BIGINT" value="3"/>
+            <column name="tasks_id" type="BIGINT" value="32"/>
+        </insert>
+        <insert tableName="zone_tasks">
+            <column name="zone_id" type="BIGINT" value="3"/>
+            <column name="tasks_id" type="BIGINT" value="33"/>
+        </insert>
+        <insert tableName="zone_tasks">
+            <column name="zone_id" type="BIGINT" value="3"/>
+            <column name="tasks_id" type="BIGINT" value="34"/>
+        </insert>
+        <insert tableName="zone_tasks">
+            <column name="zone_id" type="BIGINT" value="4"/>
+            <column name="tasks_id" type="BIGINT" value="35"/>
+        </insert>
+        <insert tableName="zone_tasks">
+            <column name="zone_id" type="BIGINT" value="4"/>
+            <column name="tasks_id" type="BIGINT" value="36"/>
+        </insert>
+        <insert tableName="zone_tasks">
+            <column name="zone_id" type="BIGINT" value="4"/>
+            <column name="tasks_id" type="BIGINT" value="37"/>
+        </insert>
+        <insert tableName="zone_tasks">
+            <column name="zone_id" type="BIGINT" value="4"/>
+            <column name="tasks_id" type="BIGINT" value="38"/>
+        </insert>
+        <insert tableName="zone_tasks">
+            <column name="zone_id" type="BIGINT" value="5"/>
+            <column name="tasks_id" type="BIGINT" value="39"/>
+        </insert>
+        <insert tableName="zone_tasks">
+            <column name="zone_id" type="BIGINT" value="5"/>
+            <column name="tasks_id" type="BIGINT" value="40"/>
+        </insert>
+        <insert tableName="zone_tasks">
+            <column name="zone_id" type="BIGINT" value="5"/>
+            <column name="tasks_id" type="BIGINT" value="41"/>
+        </insert>
+        <insert tableName="zone_tasks">
+            <column name="zone_id" type="BIGINT" value="5"/>
+            <column name="tasks_id" type="BIGINT" value="42"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
